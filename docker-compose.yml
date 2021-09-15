@@ -1,11 +1,26 @@
 version: "3.7"
 
 services:
+  webapi:
+    container_name: api
+    build:
+      context: ./store-api/store-api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ${USERPROFILE}\.aspnet\https:/https:ro
   devapp:
     container_name: ng_dev
     build:
       context: ./store-web
-      dockerfile: ./store-web/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8000:4200"
     volumes:
