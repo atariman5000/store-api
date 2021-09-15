@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  api:
+  store-api:
     container_name: api
     build:
       context: ./store-api/store-api
@@ -16,8 +16,8 @@ services:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
       - ${USERPROFILE}\.aspnet\https:/https:ro
-  web:
-    container_name: ng_dev
+  store-web:
+    container_name: web
     build:
       context: ./store-web
       dockerfile: Dockerfile
