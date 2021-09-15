@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  devapp:
+    container_name: ng_dev
+    build:
+      context: ./store-web
+      dockerfile: ./store-web/Dockerfile
+    ports:
+      - "8000:4200"
+    volumes:
+      - ./store-web/.:/app
