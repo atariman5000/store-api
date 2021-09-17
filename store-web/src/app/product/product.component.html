@@ -4,4 +4,32 @@
   <li *ngFor="let p of products$ | async">{{ p.name }}</li>
 </ul>
 
-<label>Add Product</label>
+<form #frm="ngForm">
+  <div class="mb-3">
+    <label for="name" class="form-label">Product Name</label>
+    <input
+      type="email"
+      class="form-control"
+      id="name"
+      name="name"
+      ngModel
+      placeholder="Product Name"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Product Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      rows="3"
+      ngModel
+      name="description"
+    ></textarea>
+  </div>
+</form>
+
+<button type="button" class="btn btn-primary" (click)="save(frm)">Save</button>
+
+<pre>
+  {{ frm.value | json }}
+</pre>

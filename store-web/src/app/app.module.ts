@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductModule } from './product/product.module';
+import { FormsModule } from '@angular/forms';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: 'https://localhost:5000/api',
@@ -21,6 +22,7 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     /* NgRx Specific Modules */
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),

@@ -8,17 +8,24 @@ namespace store_api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Route("api/Product")]
     public class ProductsController : ControllerBase
     {
-        private IList<Product> Products {
-            get {
-                var products = new List<Product>() {
+        private List<Product> _products;
+        public ProductsController()
+        {
+            if(_products == null)
+            {
+                _products = new List<Product>() {
                     new Product() { Id = 0, Name = "Toy", Price = 12.5m },
                     new Product() { Id = 1, Name = "Food", Price = 37.65m },
                     new Product() { Id = 2, Name = "Thing", Price = 500m }
                 };
-                
-                return products;
+            }
+        }
+        private IList<Product> Products {
+            get {
+                return _products;
             }
         }
 
@@ -26,6 +33,14 @@ namespace store_api.Controllers
         public IActionResult Get()
         {
             return Ok(Products);
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] Product product)
+        {
+            product.Id = Products.Count() + 1;
+            this._products.Add(product);
+            return Ok(product);
         }
     }
 

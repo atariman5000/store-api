@@ -27,15 +27,13 @@ namespace store_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
+            // Add Cors
+            services.AddCors(o => o.AddPolicy(MyAllowSpecificOrigins, builder =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("http://localhost:8000",
-                                                          "https://localhost:8000");
-                                  });
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddControllers();
         }
