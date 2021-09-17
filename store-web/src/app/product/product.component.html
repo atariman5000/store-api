@@ -1,6 +1,6 @@
-<p>product works!</p>
+<h2>Products:</h2>
 
-<form #frm="ngForm" (ngSubmit)="save(frm)">
+<form #frm="ngForm" (ngSubmit)="save(frm.value); frm.reset()">
   <ul>
     <li *ngFor="let p of products$ | async">
       <button
@@ -51,7 +51,7 @@
   type="button"
   [disabled]="!frm.valid"
   class="btn btn-primary"
-  (click)="save(frm)"
+  (click)="save(frm.value); frm.reset()"
 >
   Save
 </button>

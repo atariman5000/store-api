@@ -17,9 +17,9 @@ namespace store_api.Controllers
             if(_products == null)
             {
                 _products = new List<Product>() {
-                    new Product() { Id = 0, Name = "Toy", Price = 12.5m },
-                    new Product() { Id = 1, Name = "Food", Price = 37.65m },
-                    new Product() { Id = 2, Name = "Thing", Price = 500m }
+                    new Product() { Id = 1, Name = "Toy", Price = 12.5m },
+                    new Product() { Id = 2, Name = "Food", Price = 37.65m },
+                    new Product() { Id = 3, Name = "Thing", Price = 500m }
                 };
             }
         }
@@ -45,9 +45,9 @@ namespace store_api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Product product)
         {
-            if(product.Id == 0)
+            if(product.Id == null)
             {
-                product.Id = Products.Count();
+                product.Id = Products.Count() + 1;
             }
             this._products.Add(product);
             return Ok(product);
@@ -55,7 +55,7 @@ namespace store_api.Controllers
     }
 
     public class Product {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
     }

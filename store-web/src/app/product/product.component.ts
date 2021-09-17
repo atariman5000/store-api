@@ -25,10 +25,8 @@ export class ProductComponent implements OnInit {
     this.getAllProducts();
   }
 
-  save(frm: NgForm): void {
-    let p = frm.value as Product;
+  save(p: Product): void {
     this.productService.add(p);
-    frm.reset();
   }
 
   getAllProducts(): void {
@@ -37,7 +35,6 @@ export class ProductComponent implements OnInit {
 
   getProduct(id: number, frm: NgForm): void {
     this.productService.getByKey(id).subscribe((r: Product) => {
-      frm.reset();
       frm.setValue(r);
     });
   }
