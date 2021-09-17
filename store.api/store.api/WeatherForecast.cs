@@ -1,6 +1,6 @@
 using System;
 
-namespace store_api
+namespace store.api
 {
     public class WeatherForecast
     {
