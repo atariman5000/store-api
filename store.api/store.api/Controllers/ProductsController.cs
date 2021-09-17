@@ -17,9 +17,9 @@ namespace store.api.Controllers
             if(_products == null)
             {
                 _products = new List<Product>() {
-                    new Product() { Id = 1, Name = "Toy 3", Price = 12.5m },
-                    new Product() { Id = 2, Name = "Food 3", Price = 37.65m },
-                    new Product() { Id = 3, Name = "Thing 3", Price = 500m }
+                    new Product() { Id = 1, Name = "Toy", Price = 12.5m },
+                    new Product() { Id = 2, Name = "Food", Price = 37.65m },
+                    new Product() { Id = 3, Name = "Thing", Price = 500m }
                 };
             }
         }
