@@ -35,10 +35,20 @@ namespace store_api.Controllers
             return Ok(Products);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var p = Products.FirstOrDefault(w => w.Id == id);
+            return Ok(p);
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody] Product product)
         {
-            product.Id = Products.Count() + 1;
+            if(product.Id == 0)
+            {
+                product.Id = Products.Count();
+            }
             this._products.Add(product);
             return Ok(product);
         }

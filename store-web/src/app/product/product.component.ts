@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../model/product';
 import { ProductService } from './product.service';
 
@@ -11,6 +11,8 @@ import { ProductService } from './product.service';
 })
 export class ProductComponent implements OnInit {
   public products$: Observable<Product[]>;
+
+  public activeProduct: Product = {} as Product;
 
   constructor(
     private readonly productService: ProductService,
@@ -24,11 +26,19 @@ export class ProductComponent implements OnInit {
   }
 
   save(frm: NgForm): void {
-    let p = { name: frm.controls['name'].value } as Product;
+    let p = frm.value as Product;
     this.productService.add(p);
+    frm.reset();
   }
 
   getAllProducts(): void {
     this.productService.getAll();
+  }
+
+  getProduct(id: number, frm: NgForm): void {
+    this.productService.getByKey(id).subscribe((r: Product) => {
+      frm.reset();
+      frm.setValue(r);
+    });
   }
 }
