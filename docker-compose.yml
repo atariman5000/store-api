@@ -1,7 +1,15 @@
 version: "3.7"
 
 services:
-  store-api:
+  db:
+    container_name: db
+    image: mcr.microsoft.com/mssql/server
+    ports:
+      - "15592:1433"
+    environment:
+      SA_PASSWORD: "Password0!"
+      ACCEPT_EULA: "Y"
+  api:
     container_name: api
     build:
       context: ./store.api
@@ -20,7 +28,7 @@ services:
       - ./store.api/store.api/.:/src/store.api
       - ./store.api/store.dal/.:/src/store.dal
       - ./store.api/store.models/.:/src/store.models
-  store-web:
+  web:
     container_name: web
     build:
       context: ./store.web
