@@ -11,11 +11,15 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - DOTNET_GENERATE_ASPNET_CERTIFICATE=true
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages
+      - NUGET_PACKAGES=/root/.nuget/fallbackpackages
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
-      - ./store.api/store.api/.:/app
+      # - ./store.api/store.api/.:/app/store.api
       - ${USERPROFILE}\.aspnet\https:/https:ro
   store-web:
     container_name: web
