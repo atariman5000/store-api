@@ -6,6 +6,7 @@ services:
     image: mcr.microsoft.com/mssql/server
     ports:
       - "15592:1433"
+      - "5023:5022"
     environment:
       SA_PASSWORD: "Password0!"
       ACCEPT_EULA: "Y"
@@ -16,6 +17,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5001"
+    depends_on:
+      - db
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DOTNET_USE_POLLING_FILE_WATCHER=1
@@ -33,6 +36,8 @@ services:
     build:
       context: ./store.web
       dockerfile: Dockerfile
+    depends_on:
+      - api
     ports:
       - "8000:4200"
     volumes:
