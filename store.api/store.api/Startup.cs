@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using store.dal.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +36,9 @@ namespace store.api
                        .AllowAnyHeader();
             }));
 
-            services.AddDbContext<ASOHEIMSContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // Add EF Core
+            // services.AddDbContext<ASOHEIMSContext>(options =>
+            //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
         }
