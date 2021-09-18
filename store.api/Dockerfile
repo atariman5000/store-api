@@ -1,9 +1,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 
 WORKDIR /src
-COPY ["store.api/store.api.csproj", "store.api/"]
-COPY ["../store.dal/store.dal.csproj", "store.dal/"]
-# COPY ["../store.models/store.models.csproj", "store.models/"]
+COPY ["store.api/Store.API.csproj", "store.api/"]
+COPY ["../store.dal/Store.DAL.csproj", "store.dal/"]
+# COPY ["../store.models/Store.Models.csproj", "store.models/"]
 
 COPY . .
 WORKDIR "/src/store.api"

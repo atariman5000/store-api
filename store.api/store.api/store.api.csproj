@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>store.api</RootNamespace>
+    <RootNamespace>Store.API</RootNamespace>
     <UserSecretsId>e28992ce-e26b-4535-8a16-2fffd7c7a6c9</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\store.dal\store.dal.csproj" />
+    <ProjectReference Include="..\store.dal\Store.DAL.csproj" />
   </ItemGroup>
 
 
