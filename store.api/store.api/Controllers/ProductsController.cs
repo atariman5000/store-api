@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,11 +53,5 @@ namespace Store.API.Controllers
             this._products.Add(product);
             return Ok(product);
         }
-    }
-
-    public class Product {
-        public int? Id { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
     }
 }
