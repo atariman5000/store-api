@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\store.dal\Store.DAL.csproj" />
+    <ProjectReference Include="..\Store.Models\Store.Models.csproj" />
   </ItemGroup>
 
 
