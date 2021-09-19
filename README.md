@@ -1,6 +1,6 @@
 # Store API
 
-This project is built to use docker out of the box. The project is designed to use the following technology...
+This project is built to use docker out of the box. The project is designed to use the following technologies...
 
 - Angular
 - @NgRx/Data
