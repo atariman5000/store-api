@@ -5,12 +5,15 @@
     <li *ngFor="let p of products$ | async">
       <button
         type="reset"
-        class="btn btn-secondary"
-        (click)="getProduct(p.id, frm)"
+        class="btn btn-sm btn-secondary"
+        (click)="get(p.id, frm)"
       >
         Edit
       </button>
       {{ p.name }}
+      <button type="reset" class="btn btn-sm btn-danger" (click)="delete(p)">
+        Delete
+      </button>
     </li>
   </ul>
 

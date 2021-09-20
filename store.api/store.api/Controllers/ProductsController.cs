@@ -33,6 +33,14 @@ namespace Store.API.Controllers
             return Ok(p);
         }
 
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            var p = this._context.Products.FirstOrDefault(w => w.Id == id);
+            this._context.Products.Remove(p);
+            this._context.SaveChanges();
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody] Product product)
         {

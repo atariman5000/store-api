@@ -22,7 +22,18 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getAll();
+  }
+
+  getAll(): void {
+    this.productService.getAll();
+  }
+
+  get(id: number, frm: NgForm): void {
+    this.productService.getByKey(id).subscribe((r) => {
+      frm.setValue(r);
+      this.activeProduct = frm.value;
+    });
   }
 
   save(p: Product): void {
@@ -30,15 +41,7 @@ export class ProductComponent implements OnInit {
     this.productService.add(p);
   }
 
-  getAllProducts(): void {
-    this.productService.getAll();
-  }
-
-  getProduct(id: number, frm: NgForm): void {
-    this.productService.getByKey(id).subscribe((r: Product) => {
-      //this.activeProduct = r;
-      frm.setValue(r);
-      this.activeProduct = frm.value;
-    });
+  delete(entity: any) {
+    this.productService.delete(entity);
   }
 }

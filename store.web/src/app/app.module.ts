@@ -8,7 +8,6 @@ import { entityConfig } from './entity-metadata';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductModule } from './product/product.module';
 import { FormsModule } from '@angular/forms';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
@@ -27,7 +26,6 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     EntityDataModule.forRoot(entityConfig),
-    ProductModule,
   ],
   providers: [
     { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },

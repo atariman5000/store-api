@@ -31,6 +31,7 @@ services:
       - ./store.api/store.api/.:/src/store.api
       - ./store.api/store.dal/.:/src/store.dal
       - ./store.api/store.models/.:/src/store.models
+      # - ${USERPROFILE}\.aspnet\https:/https:ro
   web:
     container_name: web
     build:
