@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.DAL.Data;
 using Store.Models;
 using System;
 using System.Collections.Generic;
@@ -12,45 +13,31 @@ namespace Store.API.Controllers
     [Route("api/Product")]
     public class ProductsController : ControllerBase
     {
-        private List<Product> _products;
-        public ProductsController()
+        private StoreContext _context;
+        public ProductsController(StoreContext context)
         {
-            if(_products == null)
-            {
-                _products = new List<Product>() {
-                    new Product() { Id = 1, Name = "Toy", Price = 12.5m },
-                    new Product() { Id = 2, Name = "Food", Price = 37.65m },
-                    new Product() { Id = 3, Name = "Thing", Price = 500m }
-                };
-            }
+            _context = context;
         }
-        private IList<Product> Products {
-            get {
-                return _products;
-            }
-        }
-
+        
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(Products);
+            var results = _context.Products.ToList();
+            return Ok(results);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var p = Products.FirstOrDefault(w => w.Id == id);
+            var p = _context.Products.FirstOrDefault(w => w.Id == id);
             return Ok(p);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] Product product)
         {
-            if(product.Id == null)
-            {
-                product.Id = Products.Count() + 1;
-            }
-            this._products.Add(product);
+            this._context.Products.Add(product);
+            this._context.SaveChanges();
             return Ok(product);
         }
     }
