@@ -26,6 +26,7 @@ export class ProductComponent implements OnInit {
   }
 
   save(p: Product): void {
+    if (p.id == null) p.id = 0;
     this.productService.add(p);
   }
 
@@ -35,7 +36,9 @@ export class ProductComponent implements OnInit {
 
   getProduct(id: number, frm: NgForm): void {
     this.productService.getByKey(id).subscribe((r: Product) => {
+      //this.activeProduct = r;
       frm.setValue(r);
+      this.activeProduct = frm.value;
     });
   }
 }

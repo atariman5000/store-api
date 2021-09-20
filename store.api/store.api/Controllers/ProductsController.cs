@@ -36,7 +36,13 @@ namespace Store.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Product product)
         {
-            this._context.Products.Add(product);
+            if(product.Id > 0)
+            {
+                this._context.Products.Update(product);
+            } else
+            {
+                this._context.Products.Add(product);
+            }
             this._context.SaveChanges();
             return Ok(product);
         }
