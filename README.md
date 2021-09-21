@@ -10,7 +10,7 @@ This project is built to use docker out of the box. The project is designed to u
 
 ## Ports Used
 
-The store project uses several ports [^1] based on services. The following is a list of those ports.
+The store project uses several ports based on services. The following is a list of those ports.
 
 | Port Number | Service             |
 | :---------: | :------------------ |
@@ -45,5 +45,3 @@ docker-compose down
 ### Final Instructions
 
 When running the web project, you will need to set in the browser to accept the API project's self signed certificate. This can be done by opening the API url (https://localhost:5000/api/product/) in a browser tab and click the button to accept the certificate as is. Once this is done, you should be able to navigate to the web application and add/remove products as needed. Be sure to check your browser dev tools network tab for any possible errors.
-
-[^1]: These are external facing ports. Docker uses internal ports and networking for communication. These can be seen by inspecting the Docker files. You can also observe these settings from the Docker manager window in Windows.
