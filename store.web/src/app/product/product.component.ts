@@ -49,7 +49,11 @@ export class ProductComponent implements OnInit {
   }
 
   public getPageData(page: number, size: number): void {
-    this.productService.getWithQuery({ page: `${page}`, size: `${size}` });
+    this.productService.getWithQuery({
+      page: `${page}`,
+      size: `${size}`,
+      // sortOrder: 'name_desc',
+    });
   }
 
   delete(entity: any) {

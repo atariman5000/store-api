@@ -52,20 +52,6 @@ export class PaginatedDataService<T> extends DefaultDataService<T> {
   }
 
   // Override to store nextUrl as well as map response.results.
-  // getAll(pageSize: number = 50): Observable<T[]> {
-  //   this.pageSize = pageSize;
-  //   console.log(`API URL:`, this.apiUrl);
-  //   return this.execute(this.httpVerbs.GET, this.apiUrl).pipe(
-  //     tap((response) => {
-  //       this.nextPageUrl = this.nextApiUrl;
-  //       this.count = response.rowCount;
-  //     }),
-  //     tap((x) => console.log(`NEXT PAGE URL: ${this.nextPageUrl}`)),
-  //     map((response) => (!!response.results ? response.results : response))
-  //   );
-  // }
-
-  // Override to store nextUrl as well as map response.results.
   getWithQuery(queryParams: QueryParams | string): Observable<T[]> {
     const qParams =
       typeof queryParams === 'string'
