@@ -1,6 +1,11 @@
 <h2>Products:</h2>
 
-<form #frm="ngForm" (ngSubmit)="save(frm.value); frm.reset()">
+<form
+  #frm="ngForm"
+  (ngSubmit)="save(frm.value); frm.reset()"
+  (keyup.enter)="onEnter(frm)"
+  novalidate
+>
   <ul>
     <li *ngFor="let p of products$ | async">
       <button
@@ -63,7 +68,7 @@
 </form>
 
 <button
-  type="button"
+  type="submit"
   [disabled]="!frm.valid"
   class="btn btn-primary"
   (click)="save(frm.value); frm.reset()"
@@ -73,6 +78,10 @@
 
 <button type="reset" class="btn btn-secondary" (click)="frm.reset()">
   Clear
+</button>
+
+<button type="reset" class="btn btn-secondary" (click)="getPageData(2, 2)">
+  Get Page Test
 </button>
 
 <pre>

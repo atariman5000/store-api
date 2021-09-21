@@ -54,5 +54,46 @@ namespace Store.API.Controllers
             this._context.SaveChanges();
             return Ok(product);
         }
+
+        [HttpGet("filter")]
+        public IActionResult GetByPage([FromQuery] Filters filter)
+        {
+            var query = _context.Products.AsQueryable();
+
+            if(!String.IsNullOrEmpty(filter.SortOrder))
+            {
+                switch(filter.SortOrder)
+                {
+                    case "name_desc":
+                        query = query.OrderByDescending(s => s.Name).AsQueryable();
+                        break;
+                    case "name_asc":
+                        query = query.OrderBy(s => s.Name).AsQueryable();
+                        break;
+                    case "price_desc":
+                        query = query.OrderByDescending(s => s.Price).AsQueryable();
+                        break;
+                    case "price_asc":
+                        query = query.OrderBy(s => s.Price).AsQueryable();
+                        break;
+                }
+            }
+
+            if(filter.Page > 0 && filter.Size > 0)
+            {
+                return Ok(query.Skip((filter.Page - 1) * filter.Size).Take(filter.Size).ToList());
+            } else
+            {
+                return Ok(query.ToList());
+            }
+        }
+
+    }
+
+    public class Filters
+    {
+        public int Page { get; set; }
+        public int Size { get; set; }
+        public string SortOrder { get; set; }
     }
 }

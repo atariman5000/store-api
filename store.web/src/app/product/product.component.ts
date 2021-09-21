@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Product } from '../model/product';
 import { ProductService } from './product.service';
 
@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAll();
+    this.getPageData(1, 2);
   }
 
   getAll(): void {
@@ -39,6 +39,17 @@ export class ProductComponent implements OnInit {
   save(p: Product): void {
     if (p.id == null) p.id = 0;
     this.productService.add(p);
+  }
+
+  onEnter(frm: NgForm) {
+    if (frm.valid) {
+      this.save(frm.value);
+      frm.reset();
+    }
+  }
+
+  public getPageData(page: number, size: number): void {
+    this.productService.getWithQuery({ page: `${page}`, size: `${size}` });
   }
 
   delete(entity: any) {
