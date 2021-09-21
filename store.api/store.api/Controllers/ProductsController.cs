@@ -79,7 +79,13 @@ namespace Store.API.Controllers
                 }
             }
 
-            if(filter.Page > 0 && filter.Size > 0)
+            if (!String.IsNullOrEmpty(filter.SearchByName))
+            {
+                query = query.Where(w => w.Name.Contains(filter.SearchByName));
+            }
+
+
+            if (filter.Page > 0 && filter.Size > 0)
             {
                 return Ok(query.Skip((filter.Page - 1) * filter.Size).Take(filter.Size).ToList());
             } else
@@ -95,5 +101,6 @@ namespace Store.API.Controllers
         public int Page { get; set; }
         public int Size { get; set; }
         public string SortOrder { get; set; }
+        public string SearchByName { get; set; }
     }
 }

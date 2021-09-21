@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Product } from '../model/product';
 import { ProductService } from './product.service';
 
@@ -22,7 +23,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPageData(1, 2);
+    this.getPageData();
   }
 
   getAll(): void {
@@ -48,12 +49,17 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  public getPageData(page: number, size: number): void {
+  private _page = 1;
+  private _size = 2;
+
+  public getPageData(): void {
     this.productService.getWithQuery({
-      page: `${page}`,
-      size: `${size}`,
+      page: `${this._page}`,
+      size: `${this._size}`,
       // sortOrder: 'name_desc',
     });
+    this._page++;
+    console.log(`NEW PAGE: ${this._page}`);
   }
 
   delete(entity: any) {
