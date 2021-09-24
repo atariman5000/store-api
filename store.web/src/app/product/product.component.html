@@ -1,16 +1,24 @@
 <h2>Products:</h2>
 
-<form #frm="ngForm" (ngSubmit)="save(frm.value); frm.reset()">
+<form
+  #frm="ngForm"
+  (ngSubmit)="save(frm.value); frm.reset()"
+  (keyup.enter)="onEnter(frm)"
+  novalidate
+>
   <ul>
     <li *ngFor="let p of products$ | async">
       <button
         type="reset"
-        class="btn btn-secondary"
-        (click)="getProduct(p.id, frm)"
+        class="btn btn-sm btn-secondary"
+        (click)="get(p.id, frm)"
       >
         Edit
       </button>
       {{ p.name }}
+      <button type="reset" class="btn btn-sm btn-danger" (click)="delete(p)">
+        Delete
+      </button>
     </li>
   </ul>
 
@@ -19,6 +27,7 @@
     class="form-control"
     id="id"
     name="id"
+    value="0"
     [(ngModel)]="activeProduct.id"
   />
   <div class="mb-3">
@@ -45,10 +54,21 @@
       placeholder="Product Price"
     />
   </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Product Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="description"
+      name="description"
+      [(ngModel)]="activeProduct.description"
+      placeholder="Product Description"
+    />
+  </div>
 </form>
 
 <button
-  type="button"
+  type="submit"
   [disabled]="!frm.valid"
   class="btn btn-primary"
   (click)="save(frm.value); frm.reset()"
@@ -58,6 +78,10 @@
 
 <button type="reset" class="btn btn-secondary" (click)="frm.reset()">
   Clear
+</button>
+
+<button type="reset" class="btn btn-secondary" (click)="getPageData()">
+  Get Page Test
 </button>
 
 <pre>

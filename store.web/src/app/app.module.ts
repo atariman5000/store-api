@@ -3,13 +3,19 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import {
+  DefaultDataServiceConfig,
+  DefaultDataServiceFactory,
+  EntityDataModule,
+  HttpUrlGenerator,
+} from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductModule } from './product/product.module';
 import { FormsModule } from '@angular/forms';
+import { CustomDataServiceFactory } from './paginated-data.service';
+import { DynamicHttpUrlGenerator } from './dynamic-httpurl-generator';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root: 'https://localhost:5000/api',
@@ -27,10 +33,11 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     EntityDataModule.forRoot(entityConfig),
-    ProductModule,
   ],
   providers: [
     { provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig },
+    { provide: DefaultDataServiceFactory, useClass: CustomDataServiceFactory },
+    { provide: HttpUrlGenerator, useClass: DynamicHttpUrlGenerator },
   ],
   bootstrap: [AppComponent],
 })
